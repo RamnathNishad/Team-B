@@ -29,7 +29,7 @@ public class RegisterRequest {
     private LocalDate dob;
 
     @NotBlank
-    @Pattern(regexp = "^[0-9+\-() ]{7,20}$", message = "must be a valid phone number")
+    @Pattern(regexp = "^[0-9+\\-() ]{7,20}$", message = "must be a valid phone number")
     private String phoneNumber;
 
     @NotBlank

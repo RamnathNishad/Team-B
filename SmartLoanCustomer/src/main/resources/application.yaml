@@ -10,7 +10,7 @@ spring:
     password: ""
   sql:
     init:
-      mode: never
+      mode: always
   jpa:
     hibernate:
       ddl-auto: update

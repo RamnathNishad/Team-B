@@ -1,4 +1,11 @@
-CREATE TABLE IF NOT EXISTS customer (
+-- Drop existing tables in reverse order of creation (handle foreign key constraints)
+DROP TABLE IF EXISTS loan_application;
+DROP TABLE IF EXISTS session_token;
+DROP TABLE IF EXISTS login_history;
+DROP TABLE IF EXISTS customer;
+
+-- Create tables
+CREATE TABLE customer (
   customer_id UUID PRIMARY KEY,
   email VARCHAR(255) NOT NULL UNIQUE,
   password_hash VARCHAR(512) NOT NULL,
@@ -15,7 +22,7 @@ CREATE TABLE IF NOT EXISTS customer (
   created_date TIMESTAMP NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS login_history (
+CREATE TABLE login_history (
   id BIGINT AUTO_INCREMENT PRIMARY KEY,
   customer_id UUID NOT NULL,
   login_at TIMESTAMP NOT NULL,
@@ -23,7 +30,7 @@ CREATE TABLE IF NOT EXISTS login_history (
   CONSTRAINT fk_login_history_customer FOREIGN KEY (customer_id) REFERENCES customer(customer_id)
 );
 
-CREATE TABLE IF NOT EXISTS session_token (
+CREATE TABLE session_token (
   token VARCHAR(128) PRIMARY KEY,
   customer_id UUID NOT NULL,
   created_at TIMESTAMP NOT NULL,
@@ -33,7 +40,7 @@ CREATE TABLE IF NOT EXISTS session_token (
   CONSTRAINT fk_session_token_customer FOREIGN KEY (customer_id) REFERENCES customer(customer_id)
 );
 
-CREATE TABLE IF NOT EXISTS loan_application (
+CREATE TABLE loan_application (
   application_id UUID PRIMARY KEY,
   customer_id UUID NOT NULL,
   loan_amount DECIMAL(15,2) NOT NULL,

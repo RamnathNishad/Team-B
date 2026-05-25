@@ -9,7 +9,7 @@ import java.math.BigDecimal;
  * JPA Entity representing a Loan Application.
  *
  * Document attachments (doc_attachment1, doc_attachment2, doc_attachment3) are
- * stored as raw binary data (LONGBLOB) directly in the MySQL database.
+ * stored as raw binary data directly in the configured database.
  */
 @Entity
 @Table(name = "loan_application")
@@ -54,25 +54,23 @@ public class LoanApplication {
 
     // -------------------------------------------------------------------------
     // Document Attachments
-    // Each attachment stores the raw file bytes as a LONGBLOB in MySQL.
-    // @Lob instructs JPA to treat the field as a large object.
-    // columnDefinition = "LONGBLOB" ensures MySQL uses the correct type
-    // (supports files up to ~4 GB).
+    // Each attachment stores the raw file bytes as a database LOB.
+    // @Lob lets JPA map to the appropriate binary large-object type per dialect.
     // -------------------------------------------------------------------------
 
     /** First supporting document (e.g. ID proof). */
     @Lob
-    @Column(name = "doc_attachment1", columnDefinition = "LONGBLOB")
+    @Column(name = "doc_attachment1")
     private byte[] docAttachment1;
 
     /** Second supporting document (e.g. income proof). */
     @Lob
-    @Column(name = "doc_attachment2", columnDefinition = "LONGBLOB")
+    @Column(name = "doc_attachment2")
     private byte[] docAttachment2;
 
     /** Third supporting document (e.g. address proof). */
     @Lob
-    @Column(name = "doc_attachment3", columnDefinition = "LONGBLOB")
+    @Column(name = "doc_attachment3")
     private byte[] docAttachment3;
 }
 

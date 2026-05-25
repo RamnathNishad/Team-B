@@ -44,7 +44,7 @@ public class LoanApplicationServiceImpl implements LoanApplicationService {
     /**
      * Maps every field from the incoming {@link LoanApplicationRequest} DTO onto a
      * new {@link LoanApplication} entity, sets the default status to "PENDING" when
-     * none is supplied, and persists it to MySQL via the repository.
+     * none is supplied, and persists it via the repository.
      */
     @Override
     @Transactional

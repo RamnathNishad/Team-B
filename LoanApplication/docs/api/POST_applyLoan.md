@@ -243,6 +243,6 @@ Request
 ## Notes
 
 - **`loanType` normalisation** — the value is accepted in any casing (`home`, `HOME`, `Home`) and is stored normalised as `Personal`, `Home`, or `Auto`.
-- **Documents are stored as binary** (LONGBLOB) directly in the database; they are not written to the file system.
+- **Documents are stored as binary** (LOB/BLOB) directly in the database; they are not written to the file system.
 - **`status` default** — if omitted, the application layer is responsible for assigning a default status (typically `PENDING`).
 
